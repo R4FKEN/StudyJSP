@@ -1,6 +1,9 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
