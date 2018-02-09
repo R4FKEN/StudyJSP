@@ -18,7 +18,16 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		out.println("<!doctype html>");
+		out.println("<html lang='nl'><head>");
+		out.println("<title>Pizza Luigi</title></head>");
+		out.println("<body><h1>");
+		int uur = LocalDateTime.now().getHour();
+		out.print(uur >= 6 && uur < 12 ? "Goede morgen" :
+		uur >= 12 && uur < 18 ? "Goede middag": "Goede avond");
+		out.println("</h1></body></html>");
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
