@@ -5,11 +5,14 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.jdbc.pool.DataSource;
 
 import be.vdab.repositories.PizzaRepository;
 import be.vdab.util.StringUtils;
@@ -18,7 +21,7 @@ import be.vdab.util.StringUtils;
 public class PizzasTussenPrijzenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW = "/WEB-INF/JSP/pizzastussenprijzen.jsp";
-	private final PizzaRepository pizzaRepository = new PizzaRepository();
+	private final transient PizzaRepository pizzaRepository = new PizzaRepository();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,5 +44,9 @@ public class PizzasTussenPrijzenServlet extends HttpServlet {
 			}
 		}
 		request.getRequestDispatcher(VIEW).forward(request, response);
+	}
+	@Resource(name = PizzaRepository.JNDI_NAME)
+	void setDataSource(DataSource dataSource) {
+		pizzaRepository.setDataSource(dataSource);
 	}
 }
